@@ -77,8 +77,22 @@ TEMPLATE_DIRS = (
 
 print(os.path.join(base_dir_join('templates')))
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+"""
+Set up MySql:
+Install it
+Make sure you remember the root password
+Make sure you can connect to mysql from command line like this: mysql -uroot -p # Then enter the password
+After you're in mysql, create a user like this:
+create user 'hello'@'localhost' identified by 'world';
+create table helloworld;
+grant all privileges on helloworld.* to hello@'localhost';
+flush privileges;
+
+The make sure you can connect to mysql with that user like this:
+mysql -uhello -pworld helloworld
+
+Then change DATABASES to:
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -87,6 +101,20 @@ DATABASES = {
         'PASSWORD': 'world',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+"""
+
+# Database
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'helloworld.db',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
