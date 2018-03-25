@@ -23,10 +23,9 @@ def base_dir_join(*args):
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ztwg4%3$07flbj8o@l(m2pcw4e0sfi84=sgc2d@!dnp=0n9_a2'
+SECRET_KEY = 'ztwg4%3$07flbj8o@l(m2pcw4e0sfi84=sgc2d@!dnp=asdasd'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = SITE_URL = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = ['*']
 
