@@ -1,1 +1,11 @@
-Hello, world
+Hello, {{ name }}
+
+<br/>
+
+{% for file in files %}
+    {{ file.name }}
+    <br/>
+    {{ file.type }}
+    <br/>
+    <br/>
+{% endfor %}
