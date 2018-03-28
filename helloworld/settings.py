@@ -14,7 +14,7 @@ import os
 
 import dj_database_url
 
-from prepare_env import config
+from helloworld.prepare_env import config
 
 BASE_DIR = config['base_dir']
 
