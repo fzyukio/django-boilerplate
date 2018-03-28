@@ -12,22 +12,22 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import dj_database_url
+
+from prepare_env import config
+
+BASE_DIR = config['base_dir']
 
 
 def base_dir_join(*args):
     return os.path.join(BASE_DIR, *args)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ztwg4%3$07flbj8o@l(m2pcw4e0sfi84=sgc2d@!dnp=asdasd'
+SECRET_KEY = config['secret_key']
 
-DEBUG = SITE_URL = os.getenv('DEBUG', False)
+DEBUG = config['debug']
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config['allowed_hosts']
 
 
 # Application definition
@@ -75,8 +75,6 @@ TEMPLATE_DIRS = (
     os.path.join(base_dir_join('templates')),
 )
 
-print(os.path.join(base_dir_join('templates')))
-
 """
 Set up MySql:
 Install it
@@ -91,31 +89,14 @@ flush privileges;
 The make sure you can connect to mysql with that user like this:
 mysql -uhello -pworld helloworld
 
-Then change DATABASES to:
+Then change 'database_url' in environment-variables.yaml to:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'helloworld',                      # Or path to database file if using sqlite3.
-        'USER': 'hello',                      # Not used with sqlite3.
-        'PASSWORD': 'world',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+mysql://hello:world@localhost:3306/helloworld
+
 """
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'helloworld.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
+    'default': dj_database_url.parse(config['database_url'])
 }
 
 # Password validation
@@ -140,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-nz'
+LANGUAGE_CODE = config['language_code']
 
-TIME_ZONE = 'Pacific/Auckland'
+TIME_ZONE = config['timezone']
 
 USE_I18N = True
 
@@ -151,7 +132,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+# User uploaded content
+MEDIA_URL = '/user_data/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'user_data')

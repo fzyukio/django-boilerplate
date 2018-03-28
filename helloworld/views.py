@@ -16,7 +16,7 @@ class IndexView(TemplateView):
 
         context['name'] = 'Yukio'
 
-        txt_documents = Document.objects.filter(type='txt')
+        txt_documents = Document.objects.filter(type__iexact='txt')
 
         context['files'] = txt_documents
 

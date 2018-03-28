@@ -1,0 +1,12 @@
+# Default to SQLite3
+database_url: 'sqlite:///helloworld.db'
+
+# Other database url:
+# MySQL: mysql://USER:PASSWORD@HOST:PORT/NAME
+# Postgres: postgres://USER:PASSWORD@HOST:PORT/NAME
+
+language_code: 'en-nz'
+timezone: 'Pacific/Auckland'
+debug: True
+allowed_hosts:
+  - 'localhost'

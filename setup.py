@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 import os
 
-LONG_DESCRIPTION = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
+LONG_DESCRIPTION = open(os.path.join(os.path.dirname(__file__), 'README.md')).read(),
 
 CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable',
