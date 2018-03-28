@@ -70,17 +70,29 @@ pip install virtualenv
 ```
 
 ## Configure Git and checkout the project:
+### Configure Git
 Set your username and email for git if you haven't done so already:
 ```shell
 git config --global user.name "John Doe"
 git config --global user.email "john@doe.com"
 ```
 Generate a pair of SSH keys and import the public key to gitlab:
+> You must do this in a POSIX environment, so on Windows, instead of `cmd`, open Git Bash
 ```shell
-ssh-keygen # Leave the passphrase empty. Default path to the keys is ~/.ssh/id_rsa.pub and ~/.ssh/id_rsa.pub
+ssh-keygen # Leave the passphrase empty. Default path to the keys is `~/.ssh/id_rsa.pub` and `~/.ssh/id_rsa`
 ```
-Copy the content of ~/.ssh/id_rsa.pub **NOT THE OTHER ONE** and import it to gitlab
-Checkout the project:
+Copy the content of `~/.ssh/id_rsa.pub` **NOT THE OTHER ONE** and import it to gitlab
+
+### Checkout the project:
+#### On Windows `cmd`:
+
+```shell
+md workspace
+cd workspace
+git clone git@gitlab.com:unifier/helloworld.git
+cd helloworld
+```
+#### In POSIX terminal
 ```shell
 mkdir ~/workspace
 cd ~/workspace
@@ -88,12 +100,14 @@ git clone git@gitlab.com:unifier/helloworld.git
 cd helloworld
 ```
 ## Create a virtual environment:
+> Note: if you use PyCharm, make sure you run this command BEFORE importing the project into Pycharm. Otherwise it will use the default interpreter and you'll have to change that
 ```shell
-virtualenv -p `which python` .venv
+virtualenv .venv
 ```
 
 ## Run the project:
 ### Source the virtual environment.
+> Note: You only need to do this 
 #### On windows:
 ##### Using command line (`cmd`)
 ```shell
